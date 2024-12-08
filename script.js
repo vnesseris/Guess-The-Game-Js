@@ -1,11 +1,11 @@
 'use strict';
 
 let correctNumber = Math.floor(Math.random() * 51 );
-Boolean gameEnd = false;
+let gameEnd = false;
 let chosenNumber;
 let remainingChoices = 20;
 const chosenValues = new Set();
-setRemainingChoicesText(remainingChoices);
+setRemainingChoicesText(`Remaing choices: ${remainingChoices}`);
 
 function checkInput(){
     
@@ -18,7 +18,10 @@ function checkInput(){
         elmnt.style = "color:red";
     } else {
         setUserGuidance(chosenNumber);
-        setRemainingChoicesVal();
+        if(!gameEnd){
+            setRemainingChoicesVal();
+        }
+       
     }
     
     
@@ -43,9 +46,11 @@ function setUserGuidance(chosenNumber){
 function setRemainingChoicesVal(){
     remainingChoices -= 1;
     if(remainingChoices > 0){
-        setRemainingChoicesText(remainingChoices);
+        setRemainingChoicesText(`Remaing choices: ${remainingChoices}`);
     } else {
         //TODO handle gameover
+        gameEnd = true;
+        setRemainingChoicesText("Game over! You lost the game");
     }
     
 }
@@ -65,7 +70,7 @@ function checkValidity(chosenNumber){
 }
 
 function correctGuess(){
-    document.getElementsByClassName("number-box").innerText = chosenNumber;
-
+    document.getElementsByClassName("number-box")[0].innerText = chosenNumber;
+    gameEnd = true;
     alert("Congratulations!! You found the number");
 }
