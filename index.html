@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Guess my Number!</title>
+        <link rel="stylesheet" href="myStyle.css">
+    </head>
+    <body>
+        <div class="game-info">
+            <h1>Guess my number</h1>
+            <h2>Between 1 and 50</h2>
+        </div>
+        <div class="hidden-number">
+            <span class="number-box">?</span>
+        </div>
+        <div class="input-number">
+            Input your guess
+            <input type="number"/>
+            <button class="check-number" onclick="checkInput()">Check!</button>
+        </div>
+        <p id="showInput"> </p>
+        <p id="guideUser"></p>
+        <p></p>
+
+
+        <script src="script.js"></script>
+    </body>
+</html>

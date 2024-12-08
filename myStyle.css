@@ -1,0 +1,34 @@
+.hidden-number{
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    text-align: center;
+    font-size: 5em;
+}
+
+.number-box{
+    border: 2px solid;
+    padding: 3px 10px 3px;
+}
+
+.game-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+body{
+    background-color: #29e233;
+}
+
+input{
+    margin: 1em;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    font-size: large;
+    border: 2px solid black;
+}
+
+.check-number{
+    border: 2px solid black;
+    /* background-color: white; */
+}
