@@ -1,30 +1,38 @@
 'use strict';
 
-let correctNumber = Math.floor(Math.random() * 51 );
-let gameEnd = false;
-let chosenNumber;
-let remainingChoices = 20;
-const chosenValues = new Set();
-setRemainingChoicesText(`Remaing choices: ${remainingChoices}`);
+    let correctNumber;
+    let gameEnd;
+    let chosenNumber;
+    let remainingChoices;
+    const chosenValues = new Set();
+
+    init();
+
+function init(){
+    correctNumber = Math.floor(Math.random() * 51 );
+    gameEnd = false;
+    remainingChoices = 20;
+    chosenValues.clear();
+    document.getElementById("main-content").innerHTML = '<span class="number-box">?</span>';
+    document.querySelector("input").value = null;
+    setRemainingChoicesText(`Remaing choices: ${remainingChoices}`);
+}
 
 function checkInput(){
     
-    chosenNumber = document.querySelector("input").value;
-    document.getElementById("showInput").innerText = chosenNumber;
-    let checkNotValid = checkValidity(chosenNumber);
-    if(checkNotValid){
-        const elmnt = document.getElementById("guideUser");
-        elmnt.innerText = checkNotValid;
-        elmnt.style = "color:red";
-    } else {
-        setUserGuidance(chosenNumber);
-        if(!gameEnd){
-            setRemainingChoicesVal();
+    if(!gameEnd){
+        chosenNumber = document.querySelector("input").value;
+        document.getElementById("showInput").innerText = chosenNumber;
+        let checkNotValid = checkValidity(chosenNumber);
+        if(checkNotValid){
+            const elmnt = document.getElementById("guideUser");
+            elmnt.innerText = checkNotValid;
+            elmnt.style = "color:red";
+        } else {
+            setUserGuidance(chosenNumber);
+            setRemainingChoicesVal();        
         }
-       
-    }
-    
-    
+    }    
 }
 
 function setUserGuidance(chosenNumber){
@@ -48,11 +56,17 @@ function setRemainingChoicesVal(){
     if(remainingChoices > 0){
         setRemainingChoicesText(`Remaing choices: ${remainingChoices}`);
     } else {
-        //TODO handle gameover
         gameEnd = true;
+        document.getElementById("main-content").innerHTML = 
+        '<p style="font-size:22px"> You lost this game. Click Restart to start again</p>' + 
+        '<button onclick="restart()">Restart</button>';
         setRemainingChoicesText("Game over! You lost the game");
     }
     
+}
+
+function restart(){
+    init();
 }
 
 function setRemainingChoicesText(val){
@@ -72,5 +86,7 @@ function checkValidity(chosenNumber){
 function correctGuess(){
     document.getElementsByClassName("number-box")[0].innerText = chosenNumber;
     gameEnd = true;
-    alert("Congratulations!! You found the number");
+    document.getElementById("main-content").innerHTML = 
+        '<p style="font-size:22px"> Congratulations! You won. Click Restart to start again</p>' + 
+        '<button onclick="restart()">Restart</button>';
 }
